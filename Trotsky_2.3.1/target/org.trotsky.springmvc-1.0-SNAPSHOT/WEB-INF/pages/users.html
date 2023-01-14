@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <title>Users</title>
+</head>
+
+<body>
+<div th:each="user : ${users}">
+    <a th:text="${user.getId()}">id</a>
+    <a th:text="${user.getName()}">name</a>
+    <a th:text="${user.getAge()}">age</a>
+    <a th:text="${user.getPassword()}">password</a>
+    <a th:text="${user.getRoles()}">roles</a>
+    <a th:href="@{/{id}(id=${user.getId()})}"> Edit </a>
+    <form th:method="POST" th:action="@{/{id}(id=${user.getId()})}">
+        <input type="submit" value="Delete"/>
+    </form>
+    <p></p>
+</div>
+
+<form th:action="@{/addUser}" method="post">
+    <div th:object="${new_user}">
+        <label>Name: <input type="text" th:field="*{name}"/></label>
+        <br/>
+        <label>Age: <input type="number" th:field="*{age}"/></label>
+        <br/>
+        <label>Password: <input type="password" th:field="*{password}"/></label>
+        <br/>
+        <label>Roles: <input type="text" th:field="*{roles}"/></label>
+        <br/>
+    </div>
+    <input type="submit" value="Add user">
+</form>
+
+
+<p></p>
+</body>
+</html>
